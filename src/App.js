@@ -5,7 +5,8 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
 function App() {
-	const isLoggedIn = useSelector((state) => state.currentUser.isLoggedIn);
+	const isLoggedIn = useSelector((state) => state.isLoggedIn);
+
 	return (
 		<BrowserRouter>
 			<Navbar />

@@ -1,20 +1,19 @@
-import { useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { login } from "../redux/Auth/userSlice";
 
 const Login = () => {
 	const dispatch = useDispatch();
-	const handleChange = (e) => {
-		console.log(e.target.value);
-	};
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 	const submitLogin = (e) => {
 		e.preventDefault();
-		// dispatch(
-		// 	login({
-		// 		name: "rahul",
-		// 		email: "rahul@gmail.com",
-		// 	})
-		// );
+		dispatch(
+			login({
+				email,
+				password,
+			})
+		);
 	};
 	return (
 		<main className="form-container text-center">
@@ -33,8 +32,8 @@ const Login = () => {
 						className="form-control"
 						id="floatingInput"
 						placeholder="name@example.com"
-						name="email"
-						onChange={handleChange}
+						onChange={(e) => setEmail(e.target.value)}
+						value={email}
 					/>
 					<label htmlFor="floatingInput">Email address</label>
 				</div>
@@ -44,17 +43,16 @@ const Login = () => {
 						className="form-control"
 						id="floatingPassword"
 						placeholder="Password"
-						name="password"
-						onChange={handleChange}
+						onChange={(e) => setPassword(e.target.value)}
+						value={password}
 					/>
 					<label htmlFor="floatingPassword">Password</label>
 				</div>
-				<div className="checkbox mb-3 text-start">
-					<label>
-						<input type="checkbox" defaultValue="remember-me" /> Remember me
-					</label>
-				</div>
-				<button className="w-100 btn btn-lg btn-primary" type="submit">
+				<button
+					className="w-100 btn btn-lg btn-primary"
+					onClick={submitLogin}
+					type="submit"
+				>
 					Sign in
 				</button>
 			</form>

@@ -37,13 +37,8 @@ const Register = () => {
 					/>
 					<label htmlFor="floatingPassword">Password</label>
 				</div>
-				<div className="checkbox mb-3 text-start">
-					<label>
-						<input type="checkbox" defaultValue="remember-me" /> Remember me
-					</label>
-				</div>
 				<button className="w-100 btn btn-lg btn-primary" type="submit">
-					Sign in
+					Sign up
 				</button>
 			</form>
 		</main>

@@ -1,13 +1,23 @@
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { logout } from "../redux/Auth/userSlice";
+
 const Navbar = () => {
+	const isLoggedIn = useSelector((state) => state.isLoggedIn);
+	const localUser = useSelector((state) => state.currentUser);
+	const dispatch = useDispatch();
+	const Logout = () => {
+		dispatch(logout());
+	};
 	return (
 		<nav
 			className="navbar navbar-expand-lg fixed-top navbar-light shadow-sm"
 			aria-label="Main navigation"
 		>
 			<div className="container-fluid">
-				<a className="navbar-brand" href="#">
+				<Link className="navbar-brand" to="/">
 					Logo
-				</a>
+				</Link>
 				<button
 					className="navbar-toggler p-0 border-0"
 					type="button"
@@ -32,16 +42,35 @@ const Navbar = () => {
 					</div>
 					<div className="offcanvas-body">
 						<ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-							<li className="nav-item">
-								<a className="nav-link btn btn-dark text-white" href="#">
-									Login
-								</a>
-							</li>
-							<li className="nav-item">
-								<a className="nav-link btn btn-info text-white ms-1" href="#">
-									Register
-								</a>
-							</li>
+							{isLoggedIn ? (
+								<li className="nav-item">
+									<button
+										className="nav-link btn btn-danger text-white"
+										onClick={Logout}
+									>
+										Logout
+									</button>
+								</li>
+							) : (
+								<>
+									<li className="nav-item">
+										<Link
+											className="nav-link btn btn-dark text-white"
+											to="/login"
+										>
+											Login
+										</Link>
+									</li>
+									<li className="nav-item">
+										<Link
+											className="nav-link btn btn-info text-white ms-1"
+											to="/register"
+										>
+											Register
+										</Link>
+									</li>
+								</>
+							)}
 						</ul>
 					</div>
 				</div>
