@@ -3,10 +3,9 @@ import { useSelector } from "react-redux";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import Register from "./pages/Register";
+// import Register from "./pages/Register";
 function App() {
 	const isLoggedIn = useSelector((state) => state.isLoggedIn);
-
 	return (
 		<BrowserRouter>
 			<Navbar />
@@ -17,9 +16,9 @@ function App() {
 				<Route path="/login">
 					{isLoggedIn ? <Redirect to="/" /> : <Login />}
 				</Route>
-				<Route path="/register">
+				{/* <Route path="/register">
 					{isLoggedIn ? <Redirect to="/" /> : <Register />}
-				</Route>
+				</Route> */}
 			</Switch>
 		</BrowserRouter>
 	);

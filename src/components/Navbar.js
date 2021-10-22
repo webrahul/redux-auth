@@ -1,17 +1,17 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { logout } from "../redux/Auth/userSlice";
+import { logout, selectUser } from "../redux/Auth/userSlice";
 
 const Navbar = () => {
 	const isLoggedIn = useSelector((state) => state.isLoggedIn);
-	const localUser = useSelector((state) => state.currentUser);
+	const localUser = useSelector(selectUser);
 	const dispatch = useDispatch();
 	const Logout = () => {
 		dispatch(logout());
 	};
 	return (
 		<nav
-			className="navbar navbar-expand-lg fixed-top navbar-light shadow-sm"
+			className="navbar navbar-expand-lg sticky-top navbar-light shadow-sm"
 			aria-label="Main navigation"
 		>
 			<div className="container-fluid">
@@ -41,6 +41,7 @@ const Navbar = () => {
 						></button>
 					</div>
 					<div className="offcanvas-body">
+						{isLoggedIn && <p className="mx-auto">Welcome, {localUser.name}</p>}
 						<ul className="navbar-nav ms-auto mb-2 mb-lg-0">
 							{isLoggedIn ? (
 								<li className="nav-item">
@@ -61,14 +62,14 @@ const Navbar = () => {
 											Login
 										</Link>
 									</li>
-									<li className="nav-item">
+									{/* <li className="nav-item">
 										<Link
 											className="nav-link btn btn-info text-white ms-1"
 											to="/register"
 										>
 											Register
 										</Link>
-									</li>
+									</li> */}
 								</>
 							)}
 						</ul>

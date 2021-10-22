@@ -1,23 +1,16 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/Auth/userSlice";
+import { GoogleLogin } from "react-google-login";
+import { FaGooglePlusG } from "react-icons/fa";
 
 const Login = () => {
 	const dispatch = useDispatch();
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const submitLogin = (e) => {
-		e.preventDefault();
-		dispatch(
-			login({
-				email,
-				password,
-			})
-		);
+	const submitLogin = (response) => {
+		dispatch(login(response.profileObj));
 	};
 	return (
 		<main className="form-container text-center">
-			<form onSubmit={submitLogin}>
+			<form>
 				<img
 					className="mb-4"
 					src="https://getbootstrap.com/docs/5.1/assets/brand/bootstrap-logo.svg"
@@ -26,35 +19,25 @@ const Login = () => {
 					height={57}
 				/>
 				<h1 className="h3 mb-3 fw-normal">Please sign in</h1>
-				<div className="form-floating">
-					<input
-						type="email"
-						className="form-control"
-						id="floatingInput"
-						placeholder="name@example.com"
-						onChange={(e) => setEmail(e.target.value)}
-						value={email}
-					/>
-					<label htmlFor="floatingInput">Email address</label>
-				</div>
-				<div className="form-floating my-2">
-					<input
-						type="password"
-						className="form-control"
-						id="floatingPassword"
-						placeholder="Password"
-						onChange={(e) => setPassword(e.target.value)}
-						value={password}
-					/>
-					<label htmlFor="floatingPassword">Password</label>
-				</div>
-				<button
-					className="w-100 btn btn-lg btn-primary"
-					onClick={submitLogin}
-					type="submit"
-				>
-					Sign in
-				</button>
+
+				<GoogleLogin
+					clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+					render={(renderProps) => (
+						<button
+							onClick={renderProps.onClick}
+							className="flex-center w-100 btn btn-danger"
+						>
+							Login With
+							<strong>
+								<FaGooglePlusG className="h3 p-0 m-0 ms-2" />
+							</strong>
+						</button>
+					)}
+					// buttonText="Login"
+					onSuccess={submitLogin}
+					onFailure={() => console.log("error login google")}
+					cookiePolicy={"single_host_origin"}
+				/>
 			</form>
 		</main>
 	);
