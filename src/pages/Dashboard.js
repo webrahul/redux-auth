@@ -20,9 +20,6 @@ const Dashboard = () => {
 								<div className="mt-3">
 									<h4>{localUser.name}</h4>
 									<p className="text-secondary mb-1">{localUser.email}</p>
-									{/* <p className="text-muted font-size-sm">
-										Bay Area, San Francisco, CA
-									</p> */}
 								</div>
 							</div>
 						</div>
@@ -53,22 +50,6 @@ const Dashboard = () => {
 									{localUser.googleId}
 								</div>
 							</div>
-							<hr />
-							{/* <div className="row">
-								<div className="col-sm-3">
-									<h6 className="mb-0">Mobile</h6>
-								</div>
-								<div className="col-sm-9 text-secondary">(320) 380-4539</div>
-							</div>
-							<hr /> */}
-							{/* <div className="row">
-								<div className="col-sm-3">
-									<h6 className="mb-0">Address</h6>
-								</div>
-								<div className="col-sm-9 text-secondary">
-									Bay Area, San Francisco, CA
-								</div>
-							</div> */}
 						</div>
 					</div>
 				</div>
